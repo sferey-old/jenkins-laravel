@@ -10,6 +10,7 @@ pipeline {
       steps {
         sh '''cd ./blog
 composer install'''
+        sh 'php artisan key:generate'
       }
     }
   }
