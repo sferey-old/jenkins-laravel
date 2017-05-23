@@ -16,12 +16,29 @@ pipeline {
         
       }
     }
-    stage('UnitTest') {
+    stage('Test') {
       steps {
-        dir(path: 'blog') {
-          sh './vendor/bin/phpunit'
-        }
-        
+        parallel(
+          "PHPUnit": {
+            dir(path: 'blog') {
+              sh './vendor/bin/phpunit'
+            }
+            
+            
+          },
+          "PHPCD": {
+            dir(path: 'blog') {
+              sh './vendor/phpcd'
+            }
+            
+            
+          }
+        )
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploy'
       }
     }
   }
