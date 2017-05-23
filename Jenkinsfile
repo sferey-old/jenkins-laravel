@@ -16,5 +16,13 @@ pipeline {
         
       }
     }
+    stage('UnitTest') {
+      steps {
+        dir(path: 'blog') {
+          sh './vendor/bin/phpunit'
+        }
+        
+      }
+    }
   }
 }
