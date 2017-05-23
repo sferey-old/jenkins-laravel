@@ -8,9 +8,11 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh '''cd ./blog
-composer install'''
-        sh 'php artisan key:generate'
+        dir(path: 'blog') {
+          sh 'composer install'
+          sh 'php artisan key:generate'
+        }
+        
       }
     }
   }
