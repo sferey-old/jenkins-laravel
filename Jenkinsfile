@@ -3,7 +3,13 @@ pipeline {
   stages {
     stage('Echo') {
       steps {
-        echo 'Test'
+        echo 'Hello World'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh '''cd ./blog
+composer install'''
       }
     }
   }
