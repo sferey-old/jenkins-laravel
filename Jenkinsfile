@@ -32,7 +32,7 @@ pipeline {
             
           },
           "Report": {
-            publishHTML(target: 'PHPUnit')
+            publishHTML(target: 'publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: \'coverage\', reportFiles: \'index.html\', reportName: \'HTML Report\', reportTitles: \'RCov Report\'])')
             
           }
         )
