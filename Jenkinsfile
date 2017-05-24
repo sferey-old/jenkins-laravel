@@ -40,6 +40,7 @@ pipeline {
       steps {
         echo 'Deploy'
         pmd(pattern: './build/logs/pmd.xml')
+        sh 'pwd'
       }
     }
   }
