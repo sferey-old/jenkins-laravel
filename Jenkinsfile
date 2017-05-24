@@ -18,27 +18,24 @@ pipeline {
     }
     stage('Test') {
       steps {
-        parallel(
-          "PHPUnit": {
-            dir(path: 'blog') {
-              sh './vendor/bin/phpunit'
-            }
-            
-            
-          },
-          "PHPCD": {
-            dir(path: 'blog') {
-              sh './vendor/phpcd'
-            }
-            
-            
-          }
-        )
+        dir(path: 'blog') {
+          sh './vendor/bin/phpunit'
+        }
+        
       }
     }
     stage('Deploy') {
       steps {
-        echo 'Deploy'
+        parallel(
+          "Deploy": {
+            echo 'Deploy'
+            
+          },
+          "Report": {
+            publishHTML(target: 'PHPUnit')
+            
+          }
+        )
       }
     }
   }
