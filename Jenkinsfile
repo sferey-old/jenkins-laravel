@@ -25,14 +25,8 @@ pipeline {
       }
     }
     stage('Deploy') {
-      steps {
-        parallel(
-          "Deploy": {
-            echo 'Deploy'
-            
-          },
-          echo 'Hello World'
-        )
+      steps {          
+        echo 'Deploy'
       }
     }
   }
