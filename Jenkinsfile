@@ -14,6 +14,8 @@ pipeline {
           sh 'php artisan key:generate'
         }
         
+        sh '''rm -rf build/coverage build/logs
+mkdir build/coverage build/logs'''
       }
     }
     stage('Test') {
@@ -21,9 +23,10 @@ pipeline {
         parallel(
           "PHPUnit": {
             dir(path: 'blog') {
-              sh './vendor/bin/phpunit'
+              sh './vendor/bin/phpunit --coverage-html ../build/coverage --coverage-clover ../build/logs/clover.xml'
             }
             
+            junit './build/logs/pmd.xml'
             
           },
           "PHPMD": {
@@ -39,7 +42,8 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
-        publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: './build/logs/', reportFiles: 'phpmd.xml', reportTitles: 'PHPMD Test Reports'])
+        pmd(pattern: 'build/logs/pmd.xml')
+        sh 'pwd'
       }
     }
   }
