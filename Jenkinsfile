@@ -24,6 +24,7 @@ pipeline {
               sh './vendor/bin/phpunit'
             }
             
+            junit './build/logs/pmd.xml'
             
           },
           "PHPMD": {
