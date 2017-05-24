@@ -14,6 +14,8 @@ pipeline {
           sh 'php artisan key:generate'
         }
         
+        sh '''rm -rf build/coverage build/logs
+mkdir build/coverage build/logs'''
       }
     }
     stage('Test') {
@@ -21,7 +23,7 @@ pipeline {
         parallel(
           "PHPUnit": {
             dir(path: 'blog') {
-              sh './vendor/bin/phpunit'
+              sh './vendor/bin/phpunit --coverage-html ../build/coverage --coverage-clover ../build/logs/clover.xml'
             }
             
             junit './build/logs/pmd.xml'
