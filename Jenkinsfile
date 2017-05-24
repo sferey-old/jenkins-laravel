@@ -18,14 +18,26 @@ pipeline {
     }
     stage('Test') {
       steps {
-        dir(path: 'blog') {
-          sh './vendor/bin/phpunit'
-        }
-        
+        parallel(
+          "PHPUnit": {
+            dir(path: 'blog') {
+              sh './vendor/bin/phpunit'
+            }
+            
+            
+          },
+          "PHPMD": {
+            dir(path: './blog') {
+              sh './vendor/bin/phpmd ./app xml ../build/phpmd.xml --reportfile ../build/logs/pmd.xml'
+            }
+            
+            
+          }
+        )
       }
     }
     stage('Deploy') {
-      steps {          
+      steps {
         echo 'Deploy'
       }
     }
