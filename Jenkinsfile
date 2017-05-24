@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
-        pmd(pattern: './build/logs/pmd.xml')
+        pmd(pattern: 'build/logs/pmd.xml')
         sh 'pwd'
       }
     }
