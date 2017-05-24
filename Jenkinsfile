@@ -14,7 +14,6 @@ pipeline {
           sh 'php artisan key:generate'
         }
         
-        sh 'mkdir ./build/logs'
       }
     }
     stage('Test') {
