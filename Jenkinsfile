@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: './build/logs', reportFiles: 'phpmd.xml', reportName: 'HTML Report', reportTitles: ''])
+        pmd(pattern: './build/logs/pmd.xml')
       }
     }
   }
