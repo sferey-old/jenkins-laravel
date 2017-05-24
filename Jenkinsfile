@@ -31,10 +31,7 @@ pipeline {
             echo 'Deploy'
             
           },
-          "Report": {
-            publishHTML(target: 'test')
-            
-          }
+          echo 'Hello World'
         )
       }
     }
