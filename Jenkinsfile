@@ -39,6 +39,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
+        publishHTML(target: './build/logs/phpmd.xml')
       }
     }
   }
