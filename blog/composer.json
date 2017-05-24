@@ -12,6 +12,7 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
+        "phpmd/phpmd": "^2.6",
         "phpspec/phpspec": "^3.4",
         "phpunit/phpunit": "~5.7"
     },
